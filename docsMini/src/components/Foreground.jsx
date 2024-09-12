@@ -1,75 +1,36 @@
-import React from "react";
-import Card from "./Card";
-import { useState } from "react";
-import { motion } from "framer-motion"
+import React, { useState } from "react";
+import { MdOutlineAddCircle } from "react-icons/md";
+import InfoCard from "./InfoCard.jsx";
 import { useRef } from "react";
-function Foreground() {
-  const ref = useRef(null);
-  // useState()
-  const data=[
-    {
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, quae!",
-      filesize: "25 MB",
-      close: false,
-      tag: { isopen: true,tagtitle: "Download Now", tagcolor: "blue"}
-    },
-    {
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, quae!",
-      filesize: "10 MB",
-      close: false,
-      tag: { isopen: true,tagtitle: "Download Now", tagcolor: "green"}
-    },
-    {
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, quae!",
-      filesize: "50 MB",
-      close: false,
-      tag: { isopen: true,tagtitle: "Download Now", tagcolor: "blue"}
-    },
-    {
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, quae!",
-      filesize: "60 MB",
-      close: false,
-      tag: { isopen: true,tagtitle: "Download Now", tagcolor: "green"}
-    },
-    {
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, quae!",
-      filesize: ".9mb",
-      close: false,
-      tag: { isopen: true,tagtitle: "Download Now", tagcolor: "green"}
-    },
-    {
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, quae!",
-      filesize: ".9mb",
-      close: false,
-      tag: { isopen: false,tagtitle: "Download Now", tagcolor: "green"}
-    },
-    {
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, quae!",
-      filesize: ".9mb",
-      close: false,
-      tag: { isopen: true,tagtitle: "Download Now", tagcolor: "green"}
-    },
-    {
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, quae!",
-      filesize: ".9mb",
-      close: true,
-      tag: { isopen: true,tagtitle: "Download Now", tagcolor: "green"}
-    },
-    {
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, quae!",
-      filesize: ".9mb",
-      close: true,
-      tag: { isopen: true,tagtitle: "Download Now", tagcolor: "green"}
-    },
-  ];
-  return (
-  <div ref={ref}className=" fixed  top-0 left-0 z-[3] h-full  w-full flex flex-wrap gap-10 flexwrap-wrap p-8">
-    {data.map((item, index) =>(
-      <Card data={item} reference={ref}/>
-    ))}
+import InputModal from "./InputModal.jsx";
+import useGetCards from "../hooks/useGetCards.js";
 
-  </div>
-  )
+
+function Foreground() {
+  const { cardInfo } = useGetCards();
+  const [showModel, setShowModel] = useState(false);
+  const ref = useRef(null);
+  
+  console.log(cardInfo);
+  // Remove the unused function
+  // function handleCreatecard() {
+  //   console.log("create card");
+  // }
+  return (
+    <div ref={ref} className="relative top-0 left-0 z-[3] h-full w-full flex flex-wrap gap-10 flexwrap-wrap p-8 overflow-y-scroll overflow-x-hidden">
+      {cardInfo && cardInfo.map((card) => {
+        console.log(card);
+        return <InfoCard reference={ref} data={card} />;
+      })}
+
+
+      <div className="absolute right-8 bottom-8 h-10 w-10">
+        <MdOutlineAddCircle className="fixed h-16 w-16 text-teal-300 cursor-pointer" onClick={() => setShowModel(true)} />
+      </div>
+
+      {showModel && <InputModal onclose={() => setShowModel(false)} />}
+    </div>
+  );
 }
 
 export default Foreground;

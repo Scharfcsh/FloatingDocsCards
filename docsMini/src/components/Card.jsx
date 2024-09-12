@@ -5,8 +5,8 @@ import { FaDownload } from "react-icons/fa";
 import { IoMdCloseCircle } from "react-icons/io";
 function Card({data, reference}) {
   return (
-    <motion.div drag dragConstraints={reference} whileDrag={{ scale: 1.2 }} dragElastic={0.5} dragTransition={{ bounceStiffness: 100, bounceDamping: 10 }} className="relative flex-shrink-0 w-60 h-72 rounded-[20px] bg-neutral-700 text-white py-8 px-4 overflow-hidden">
-        <FaFileLines />
+    <motion.div drag dragConstraints={reference} whileDrag={{ scale: 1.1 }} dragElastic={0.5} dragTransition={{ bounceStiffness: 100, bounceDamping: 10 }} className="relative flex-shrink-0 w-60 h-72 rounded-[20px] bg-neutral-700 text-white py-8 px-4 overflow-hidden">
+        {/* <FaFileLines /> */}
         <p className='text-sm mt-5 font-semibold'>{data.desc}</p>
         <div className='footer absolute bottom-0  w-full   left-0'>
             <div className='flex items-center justify-between py-3 px-7 bottom-5'>
