@@ -22,6 +22,8 @@ const useGetCards = () => {
         fetchCards();
     }, []); // The empty dependency array ensures this runs only once when the component mounts
 
+    // setCardInfo([...cardInfo,data]);
+
     return { cardInfo };
 }
 

@@ -11,16 +11,16 @@ function Foreground() {
   const [showModel, setShowModel] = useState(false);
   const ref = useRef(null);
   
-  console.log(cardInfo);
+  // console.log(cardInfo);
   // Remove the unused function
   // function handleCreatecard() {
   //   console.log("create card");
   // }
   return (
     <div ref={ref} className="relative top-0 left-0 z-[3] h-full w-full flex flex-wrap gap-10 flexwrap-wrap p-8 overflow-y-scroll overflow-x-hidden">
-      {cardInfo && cardInfo.map((card) => {
-        console.log(card);
-        return <InfoCard reference={ref} data={card} />;
+      {cardInfo && cardInfo.map((card,idx) => {
+        // console.log(card);
+        return <InfoCard reference={ref} data={card} key={idx}/>;
       })}
 
 
