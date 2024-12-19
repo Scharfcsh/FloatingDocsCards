@@ -1,6 +1,7 @@
 import { useReducer, useRef, useState } from "react";
 import { MdClose } from "react-icons/md";
 import useSetCards from "../hooks/useSetCards";
+import {cards} from "../constants/cards";
 
 const InputModal = ({onclose}) => {
   const modelref = useRef();
@@ -26,6 +27,7 @@ const InputModal = ({onclose}) => {
     e.preventDefault();
     // console.log(Cardinfo); // You can handle the form submission as required
     useSetCards(Cardinfo);
+    cards.push(Cardinfo);
     onclose();
   };
 

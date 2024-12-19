@@ -1,28 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'; // Ensure axios is imported
 
 const useGetCards = () => {
-    const [cardInfo, setCardInfo] = useState(null);
-    const [error, setError] = useState(null);
+    const [cardInfo, setCardInfo] = useState([]);
+    // const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchCards = async () => {
-            try {
-                const response = await axios.get("/api/cards");
-                const data = response.data;
-                console.log(data);
-                setCardInfo(data); // Make sure to access the correct data field
-            } catch (error) {
-                setError("Error fetching data");
-                console.log("Error fetching data");
-                // You can also set a toast here for error notification
-            }
-        };
+        const storedCards = JSON.parse(localStorage.getItem('cards')) || [];
+        setCardInfo(storedCards);
+    }, []);
 
-        fetchCards();
-    }, []); // The empty dependency array ensures this runs only once when the component mounts
-
-    // setCardInfo([...cardInfo,data]);
+    const addCard = (name, profession, email, contactNo) => {
+        try {
+            const storedCards = JSON.parse(localStorage.getItem('cards')) || [];
+            const newCard = { name, profession, email, contactNo };
+            storedCards.push(newCard);
+            localStorage.setItem('cards', JSON.stringify(storedCards));
+            setCardInfo(storedCards);
+        } catch (error) {
+            setError("Error saving data");
+            console.log("Error saving data");
+        }
+    };
 
     return { cardInfo };
 }

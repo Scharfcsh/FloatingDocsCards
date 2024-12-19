@@ -4,10 +4,13 @@ import InfoCard from "./InfoCard.jsx";
 import { useRef } from "react";
 import InputModal from "./InputModal.jsx";
 import useGetCards from "../hooks/useGetCards.js";
+import {cards} from "../constants/cards.js";
 
 
 function Foreground() {
-  const { cardInfo } = useGetCards();
+  // const { cardInfo } = useGetCards();
+  const cardInfo = JSON.parse(localStorage.getItem('cards')) || [];
+  // const cardInfo = cards;
   const [showModel, setShowModel] = useState(false);
   const ref = useRef(null);
   
@@ -17,7 +20,7 @@ function Foreground() {
   //   console.log("create card");
   // }
   return (
-    <div ref={ref} className="relative top-0 left-0 z-[3] h-full w-full flex flex-wrap gap-10 flexwrap-wrap p-8 overflow-y-scroll overflow-x-hidden">
+    <div ref={ref} className="relative top-0 left-0 z-[3] h-full w-full grid grid-cols-3 gap-10 flexwrap-wrap p-8 overflow-y-scroll overflow-x-hidden">
       {cardInfo && cardInfo.map((card,idx) => {
         // console.log(card);
         return <InfoCard reference={ref} data={card} key={idx}/>;
